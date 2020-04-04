@@ -1,0 +1,12 @@
+- name: copy nginx conf file
+  copy: src={{ item.src }} dest={{ nginx_basedir }}/{{ item.dest }} backup=yes owner=root group=root mode=0644
+  with_items:
+   - { src: enable-php-00.conf,dest: conf/enable-php-00.conf }
+   - { src: enable-php-72.conf,dest: conf/enable-php-72.conf }
+   - { src: enable-php-72.conf,dest: conf/enable-php-72.conf }
+   - { src: fastcgi.conf,dest: conf/fastcgi.conf }
+   - { src: pathinfo.conf,dest: conf/pathinfo.conf }
+
+- name: copy php conf file
+  copy: src=php.ini dest=/usr/local/php/etc/php.ini
+

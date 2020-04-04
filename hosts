@@ -1,0 +1,7 @@
+[initialize]
+172.20.2.221 ansible_ssh_port=22 ansible_ssh_user=root ansible_ssh_pass='123456'
+
+
+[initialize:vars]
+h5server_name=m.chaonengketang.com
+pcserver_name=www.chaonengketang.com
