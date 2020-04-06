@@ -1,0 +1,17 @@
+- name: push api code to remote machine
+  synchronize: src=../../env_modify/ dest={{ project_path }}/{{ pcserver_name }} delete=yes rsync_opts=--exclude=.env,public,storage
+  when: {{ item }} == "api"
+
+- name: push pc code to remote machine
+  synchronize: src=../../env_modify/pc/ dest={{ project_path }}/{{ pcserver_name }}/public/  delete=yes rsync_opts=adminstyle,agreement.html,cert,index.php,logs,robots.txt,statics,ueditor-php,uploads
+  when: {{ item }} == "pc"
+
+- name: push admin code to remote machine
+  synchronize: src=../../env_modify/pc/adminstyle/ dest={{ project_path }}/{{ pcserver_name }}/public/adminstyle/ delete=yes 
+  when: {{ item }} == "admin"
+
+
+- name: push h5 code to remote machine
+  synchronize: src=../../env_modify_h5/dist/ dest={{ project_path }}/{{ h5server_name }}/
+  when: {{ item }} == "h5"
+

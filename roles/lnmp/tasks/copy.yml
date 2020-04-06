@@ -1,0 +1,24 @@
+- name: create nginx config directory
+  shell: mkdir {{ nginx_basedir }}/{vhost,rewrite}
+
+- name: copy templates conf file
+  template: src={{ item.src }} dest={{ nginx_basedir }}/{{ item.dest }} backup=yes owner=root group=root mode=0644
+  with_items:
+   - { src: nginx.conf,dest: conf/nginx.conf }
+   - { src: pcserver_name.conf,dest: vhost/{{ pcserver_name }}.conf }
+   - { src: h5server_name.conf,dest: vhost/{{ h5server_name }}.conf }
+   - { src: pcserver_name.com.conf,dest: rewrite/{{ pcserver_name }}.conf }
+   - { src: h5server_name.com.conf,dest: rewrite/{{ h5server_name }}.conf }
+
+- name: copy nginx conf file
+  copy: src={{ item.src }} dest={{ nginx_basedir }}/{{ item.dest }} backup=yes owner=root group=root mode=0644
+  with_items:
+   - { src: enable-php-00.conf,dest: conf/enable-php-00.conf }
+   - { src: enable-php-72.conf,dest: conf/enable-php-72.conf }
+   - { src: enable-php-72.conf,dest: conf/enable-php-72.conf }
+   - { src: fastcgi.conf,dest: conf/fastcgi.conf }
+   - { src: pathinfo.conf,dest: conf/pathinfo.conf }
+
+- name: copy php conf file
+  copy: src=php.ini dest=/usr/local/php/etc/php.ini
+

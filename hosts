@@ -1,0 +1,20 @@
+[initialize]
+172.20.2.221 ansible_ssh_port=22 ansible_ssh_user=root ansible_ssh_pass='123456'
+
+
+[initialize:vars]
+h5server_name=m.chaonengketang.com
+pcserver_name=www.chaonengketang.com
+git_api_address=http://git.baijiashilian.com/zywx/wx34_api_fyzs_deploy.git
+git_pc_address=http://git.baijiashilian.com/zywx/wx34_pc_fyzs_deploy.git
+git_admin_address=http://git.baijiashilian.com/zywx/wx34_admin_fyzs_deploy.git
+git_h5_address=http://git.baijiashilian.com/zywx/wx34_h5_fyzs_deploy.git
+version=pro4.3.3
+rds_address=rds-12312
+rds_database=wangxiao
+rds_user=root
+rds_password=root
+redis_address=redis-123
+redis_password=123456
+
+

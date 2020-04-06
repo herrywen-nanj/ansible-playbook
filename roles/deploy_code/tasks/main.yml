@@ -1,0 +1,26 @@
+- name: create project directory
+  file: path={{ project_path }}/{{ item }} state=directory owner=root mode=0644 recurse=yes
+  loop:
+  - {{ pcserver_name }}
+  - {{ h5server_name }}  
+
+- name: push pc code to remote machine
+  synchronize: src=../../env_modify/ dest={{ project_path }}/{{ pcserver_name }}
+
+
+- name: push h5 code to remote machine
+  synchronize: src=../../env_modify_h5/dist/ dest={{ project_path }}/{{ h5server_name }}
+
+- name: rename .env.example in project
+  shell: mv {{ project_path }}/{{ pcserver_name }}/.env.example {{ project_path }}/{{ pcserver_name }}/.env
+
+
+- name: copy modify scripts to remote machine
+  copy: src=modify.sh   dest={{ project_path }}/{{ pcserver_name }}/modify.sh owner=root group=root mode=0777
+
+
+- name: excute this modify scripts 
+  shell: ./modify.sh {{ pcserver_name }} {{ pcserver_name }} {{ h5server_name }} {{ version }} {{ rds_address }} {{ rds_database }} {{ rds_user }} {{ rds_password }} {{ redis_address }}  {{ redis_password }} {{ project_path }}/{{ pcserver_name }}/.env
+
+- name: build product
+  shell: cd {{ project_path }}/{{ pcserver_name }} && make && make install

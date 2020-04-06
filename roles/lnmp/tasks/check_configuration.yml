@@ -1,0 +1,7 @@
+- name: test nginx configuration
+  shell: /usr/local/nginx/sbin/nginx -t
+  notify: restart nginx
+  
+- name: test php-fpm configuration
+  shell: /usr/local/php/sbin/php-fpm -t
+  notify: restart php-fpm

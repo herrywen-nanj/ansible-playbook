@@ -1,0 +1,26 @@
+- name: get package
+  unarchive: src=http://mirrors.linuxeye.com/lnmp-full.tar.gz dest=/opt mode=0755 remote_src=yes
+
+  # 在开发测试环境中
+- name: excute scripts install lnmp 
+  shell: /bin/bash /opt/lnmp/install.sh  --nginx_option 1 --phpcache_option 1  --php_option 7 --php_extensions fileinfo,redis --db_option 2 --dbinstallmethod 1 --dbrootpwd "123456" --pureftpd --redis && ./addons.sh --composer --install
+  
+  
+  # 正式环境
+#- name: excute scripts install lnmp 
+#  shell: /bin/bash /opt/lnmp/install.sh  --nginx_option 1 --phpcache_option 1  --php_option 7 --php_extensions fileinfo,redis  --pureftpd  && /bin/bash /opt/lnmp/addons.sh --composer --install
+
+  # 在开发测试环境中
+- name: ensure nginx and php-fpm and mysqld process is staring
+  service: name={{ item }} state=started enabled=yes
+  with_items:
+  - nginx
+  - php-fpm
+  - mysqld
+
+  # 在正式环境中
+#- name: ensure nginx and php-fpm and mysqld process is staring
+#  service: name={{ item }} state=started enabled=yes
+#  with_items:
+#  - nginx
+#  - php-fpm
