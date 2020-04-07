@@ -8,7 +8,7 @@
   
   # 正式环境
 #- name: excute scripts install lnmp 
-#  shell: /bin/bash /opt/lnmp/install.sh  --nginx_option 1 --phpcache_option 1  --php_option 7 --php_extensions fileinfo,redis  --pureftpd  && /bin/bash /opt/lnmp/addons.sh --composer --install
+#  shell: /bin/bash /opt/lnmp/install.sh  --nginx_option 1 --phpcache_option 1  --php_option 7 --php_extensions fileinfo,redis  --pureftpd  && /bin/bash /opt/lnmp/addons.sh --install 1 --composer 1
 
   # 在开发测试环境中
 - name: ensure nginx and php-fpm and mysqld process is staring
