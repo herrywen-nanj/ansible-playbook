@@ -21,3 +21,4 @@ ansible-playbook -i hosts $operation.yml -e point=$point -e branch_name=$branch_
 
 
 ## 与jenkins搭配示例图片
+![image]https://github.com/herrywen-nanj/ansible-playbook/blob/master/12.png
