@@ -31,11 +31,11 @@ c. branch_name: 指定端的哪个分支，根据项目名称来，一般都项�
 
 ## jenkins上脚本说明 
    Usage: 
-   根据传入参数选择部署还是更新代码，以及部署到哪个端，部署哪个端的分支
+   根据传入参数选择部署还是更新代码，以及部署到哪个端，部署哪个端的分支，这里的分支是指针对业务代码api端，admin端，pc端，h5端
 ```
 case $operation in
      deploy)
-               ./main.sh $operation $branch_name && ansible-playbook -i hosts deploy_ssl.yml -e branch_name=$branch_name
+               ./main.sh $operation $branch_name && ansible-playbook -i hosts $operation.yml -e branch_name=$branch_name
                ;;
      update)
                ansible-playbook -i hosts $operation.yml -e point=$point -e branch_name=$branch_name
