@@ -23,7 +23,14 @@ c. branch_name: 指定端的哪个分支，根据项目名称来，一般都项�
 
 ## Usage：
 ```
-ansible-playbook -i hosts $operation.yml -e point=$point -e branch_name=$branch_name
+case $operation in
+     deploy)
+               ./main.sh $operation $branch_name && ansible-playbook -i hosts deploy_ssl.yml -e branch_name=$branch_name
+               ;;
+     update)
+               ansible-playbook -i hosts $operation.yml -e point=$point -e branch_name=$branch_name
+               ;;
+esac
 ```
 
 
